@@ -1,0 +1,27 @@
+.contenedorImg{
+	text-align: center;
+	padding: 15px;
+	border-radius: 15px;
+	background-color: #DFDCDC;
+}
+
+.imagenesVisualizacion{
+	height: 35px;
+	width: auto;
+}
+
+.seleccionadorColor{
+	width:100%;
+	height:100px;
+}
+
+.visualizacionColor{
+	width: 100%;
+}
+
+@media print {
+	@page { margin: 0;}
+	html{
+		visibility:hidden
+	}
+}

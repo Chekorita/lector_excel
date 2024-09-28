@@ -1,0 +1,24 @@
+#btnVal{
+	width: 250px;
+	background-color: transparent;
+	font-size: 1.1rem;
+	text-align: center;
+}
+
+.redondeadoMenu{
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	text-align:center;
+	padding: 20px;
+	box-shadow: 2px 4px 15px 1px rgba(0,0,0,0.51);
+	-webkit-box-shadow: 2px 4px 15px 1px rgba(0,0,0,0.51);
+	-moz-box-shadow: 2px 4px 15px 1px rgba(0,0,0,0.51);
+}
+
+@media print {
+	@page { margin: 0;}
+	html{
+		visibility:hidden
+	}
+}
