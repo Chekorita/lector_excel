@@ -1,4 +1,5 @@
 <?php
+    require '../vendor/autoload.php';
     include './funciones_generales.php';
     include './funciones_fechas.php';
 
@@ -39,8 +40,76 @@
                 $tipo_archivo = $archivo['type'];
                 switch($tipo_archivo){
                     case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                        //leer archivo excel
+                        $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                        $spreadsheet = $reader->load($file_archivo);
+                        $hoja = $spreadsheet->getActiveSheet();
+                        $columnas = [];
+                        $datos = [];
+                        $numero_fila = 0;
+                        foreach($hoja->getRowIterator() as $fila){
+                            $celdas = $fila->getCellIterator();
+                            $numero_celda = 0;
+                            $data = [];
+                            foreach($celdas as $celda){
+                                $dato = $celda->getValue();
+                                $dato = str_replace("??????", "", $dato);
+                                $dato = iconv("ISO-8859-1", "UTF-8", $dato);
+                                if($numero_fila == 0){
+                                    $columnas[] = $dato;
+                                }else{
+                                    $data[] = $dato;
+                                }
+                                $numero_celda++;
+                            }
+                            if($numero_fila > 0){
+                                $datos[] = $data;
+                            }
+                            $numero_fila++;
+                        }
+                        $respuesta = [
+                            "estado" => 1,
+                            "mensaje" => "Archivo procesado correctamente",
+                            "columnas" => $columnas,
+                            "data" => $datos,
+                        ];
+                        return $respuesta;
                     break;
                     case 'application/vnd.ms-excel':
+                        //leer archivo excel
+                        $reader = new PhpOffice\PhpSpreadsheet\Reader\Xls();
+                        $spreadsheet = $reader->load($file_archivo);
+                        $hoja = $spreadsheet->getActiveSheet();
+                        $columnas = [];
+                        $datos = [];
+                        $numero_fila = 0;
+                        foreach($hoja->getRowIterator() as $fila){
+                            $celdas = $fila->getCellIterator();
+                            $numero_celda = 0;
+                            $data = [];
+                            foreach($celdas as $celda){
+                                $dato = $celda->getValue();
+                                $dato = str_replace("??????", "", $dato);
+                                $dato = iconv("ISO-8859-1", "UTF-8", $dato);
+                                if($numero_fila == 0){
+                                    $columnas[] = $dato;
+                                }else{
+                                    $data[] = $dato;
+                                }
+                                $numero_celda++;
+                            }
+                            if($numero_fila > 0){
+                                $datos[] = $data;
+                            }
+                            $numero_fila++;
+                        }
+                        $respuesta = [
+                            "estado" => 1,
+                            "mensaje" => "Archivo procesado correctamente",
+                            "columnas" => $columnas,
+                            "data" => $datos,
+                        ];
+                        return $respuesta;
                     break;
                     case 'text/csv':
                         $numero_fila = 0;
