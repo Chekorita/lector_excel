@@ -166,34 +166,40 @@ function inicializar_tabla(columnas,datos){
 			topStart: {
                 info: 'info',
                 buttons: [
-                    {
-                        extend: 'copyHtml5',
-                        text: 'Copiar tabla',
-						exportOptions: {
-							columns: ':visible'
-						}
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        text: 'Exportar Excel',
-						exportOptions: {
-							columns: ':visible'
-						}
-                    },
-                    {
-                        extend: 'csvHtml5',
-                        text: 'Exportar CSV',
-						exportOptions: {
-							columns: ':visible'
-						}
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        text: 'Exportar PDF',
-						exportOptions: {
-							columns: ':visible'
-						}
-                    },
+					{
+						extend: 'collection',
+						text: 'Exportar',
+						buttons: [
+							{
+								extend: 'copyHtml5',
+								text: 'Copiar tabla',
+								exportOptions: {
+									columns: ':visible'
+								}
+							},
+							{
+								extend: 'excelHtml5',
+								text: 'Exportar Excel',
+								exportOptions: {
+									columns: ':visible'
+								}
+							},
+							{
+								extend: 'csvHtml5',
+								text: 'Exportar CSV',
+								exportOptions: {
+									columns: ':visible'
+								}
+							},
+							{
+								extend: 'pdfHtml5',
+								text: 'Exportar PDF',
+								exportOptions: {
+									columns: ':visible'
+								}
+							},
+						]
+					},
 					{
 						extend: 'colvis',
 						text: 'Ocultar columnas',
@@ -207,6 +213,8 @@ function inicializar_tabla(columnas,datos){
 			bottom: 'paging',
 		},
 		searchDelay: 350,
+		colReorder: true,
+		responsive: true,
 	});
 
 	tabla_datos_procesados
