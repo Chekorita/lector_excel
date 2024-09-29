@@ -69,4 +69,4 @@
 			</div>
 		</div>
 	</div>
-<?php include INCLUDES.'footer_alterno.php'; ?>
+<?php include INCLUDES.'footer.php'; ?>
