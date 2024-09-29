@@ -169,19 +169,35 @@ function inicializar_tabla(columnas,datos){
                     {
                         extend: 'copyHtml5',
                         text: 'Copiar tabla',
+						exportOptions: {
+							columns: ':visible'
+						}
                     },
                     {
                         extend: 'excelHtml5',
                         text: 'Exportar Excel',
+						exportOptions: {
+							columns: ':visible'
+						}
                     },
                     {
                         extend: 'csvHtml5',
                         text: 'Exportar CSV',
+						exportOptions: {
+							columns: ':visible'
+						}
                     },
                     {
                         extend: 'pdfHtml5',
                         text: 'Exportar PDF',
+						exportOptions: {
+							columns: ':visible'
+						}
                     },
+					{
+						extend: 'colvis',
+						text: 'Ocultar columnas',
+					},
                 ]
             },
 			topEnd: 'search',
