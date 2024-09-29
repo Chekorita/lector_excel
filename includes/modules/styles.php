@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo LIBS; ?>sweet_alert/css/sweetAlert2.css">
 <link rel="stylesheet" type="text/css" href="<?php echo LIBS; ?>datatables/css/datatables.css">
 
-
 <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>estilosGenerales.css">
 <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>estilos_generales.css">
 <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>index.css">
