@@ -43,29 +43,41 @@
                         //leer archivo excel
                         $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
                         $spreadsheet = $reader->load($file_archivo);
-                        $hoja = $spreadsheet->getActiveSheet();
+                        //leeter todas las hojas
+                        $hojas = $spreadsheet->getSheetNames();
                         $columnas = [];
                         $datos = [];
-                        $numero_fila = 0;
-                        foreach($hoja->getRowIterator() as $fila){
-                            $celdas = $fila->getCellIterator();
-                            $numero_celda = 0;
-                            $data = [];
-                            foreach($celdas as $celda){
-                                $dato = $celda->getValue();
-                                $dato = str_replace("??????", "", $dato);
-                                $dato = iconv("ISO-8859-1", "UTF-8", $dato);
-                                if($numero_fila == 0){
-                                    $columnas[] = $dato;
-                                }else{
-                                    $data[] = $dato;
+                        foreach($hojas as $hoja){
+                            $spreadsheet->setActiveSheetIndexByName($hoja);
+                            $hoja = $spreadsheet->getActiveSheet();
+                            $numero_fila = 0;
+                            foreach($hoja->getRowIterator() as $fila){
+                                $celdas = $fila->getCellIterator();
+                                $numero_celda = 0;
+                                $data = [];
+                                foreach($celdas as $celda){
+                                    $dato = $celda->getValue();
+                                    $dato = str_replace("??????", "", $dato);
+                                    $dato = iconv("ISO-8859-1", "UTF-8", $dato);
+                                    $dato = limpiarCadenaParcial($dato);
+                                    if($dato != "" && $dato != null){
+                                        array_push($data, $dato);
+                                    }
+                                    $numero_celda++;
                                 }
-                                $numero_celda++;
+                                if($numero_fila > 0){
+                                    $numero_columnas = count($columnas);
+                                    $numero_data = count($data);
+                                    if($data != [] && $numero_data == $numero_columnas){
+                                        array_push($datos,$data);
+                                    }
+                                }else{
+                                    if($columnas == []){
+                                        $columnas = $data;
+                                    }
+                                }
+                                $numero_fila++;
                             }
-                            if($numero_fila > 0){
-                                $datos[] = $data;
-                            }
-                            $numero_fila++;
                         }
                         $respuesta = [
                             "estado" => 1,
@@ -77,31 +89,43 @@
                     break;
                     case 'application/vnd.ms-excel':
                         //leer archivo excel
-                        $reader = new PhpOffice\PhpSpreadsheet\Reader\Xls();
+                        $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
                         $spreadsheet = $reader->load($file_archivo);
-                        $hoja = $spreadsheet->getActiveSheet();
+                        //leeter todas las hojas
+                        $hojas = $spreadsheet->getSheetNames();
                         $columnas = [];
                         $datos = [];
-                        $numero_fila = 0;
-                        foreach($hoja->getRowIterator() as $fila){
-                            $celdas = $fila->getCellIterator();
-                            $numero_celda = 0;
-                            $data = [];
-                            foreach($celdas as $celda){
-                                $dato = $celda->getValue();
-                                $dato = str_replace("??????", "", $dato);
-                                $dato = iconv("ISO-8859-1", "UTF-8", $dato);
-                                if($numero_fila == 0){
-                                    $columnas[] = $dato;
-                                }else{
-                                    $data[] = $dato;
+                        foreach($hojas as $hoja){
+                            $spreadsheet->setActiveSheetIndexByName($hoja);
+                            $hoja = $spreadsheet->getActiveSheet();
+                            $numero_fila = 0;
+                            foreach($hoja->getRowIterator() as $fila){
+                                $celdas = $fila->getCellIterator();
+                                $numero_celda = 0;
+                                $data = [];
+                                foreach($celdas as $celda){
+                                    $dato = $celda->getValue();
+                                    $dato = str_replace("??????", "", $dato);
+                                    $dato = iconv("ISO-8859-1", "UTF-8", $dato);
+                                    $dato = limpiarCadenaParcial($dato);
+                                    if($dato != "" && $dato != null){
+                                        array_push($data, $dato);
+                                    }
+                                    $numero_celda++;
                                 }
-                                $numero_celda++;
+                                if($numero_fila > 0){
+                                    $numero_columnas = count($columnas);
+                                    $numero_data = count($data);
+                                    if($data != [] && $numero_data == $numero_columnas){
+                                        array_push($datos,$data);
+                                    }
+                                }else{
+                                    if($columnas == []){
+                                        $columnas = $data;
+                                    }
+                                }
+                                $numero_fila++;
                             }
-                            if($numero_fila > 0){
-                                $datos[] = $data;
-                            }
-                            $numero_fila++;
                         }
                         $respuesta = [
                             "estado" => 1,
