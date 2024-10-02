@@ -105,10 +105,11 @@
                                 $numero_celda = 0;
                                 $data = [];
                                 foreach($celdas as $celda){
-                                    $dato = $celda->getValue();
+                                    $dato = mb_convert_encoding($celda->getValue(), 'ISO-8859-1', 'UTF-8');
                                     $dato = str_replace("??????", "", $dato);
+                                    //esto lo realizo debido a que he encontrado puntos donde fallan ciertos caracteres como la ñ
                                     $dato = iconv("ISO-8859-1", "UTF-8", $dato);
-                                    $dato = limpiarCadenaParcial($dato);
+                                    $dato = limpiarCadena($dato, "Con");
                                     if($dato != "" && $dato != null){
                                         array_push($data, $dato);
                                     }
