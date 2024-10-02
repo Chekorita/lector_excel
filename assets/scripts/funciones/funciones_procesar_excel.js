@@ -187,6 +187,8 @@ function inicializar_tabla(columnas,datos){
 							{
 								extend: 'csvHtml5',
 								text: 'Exportar CSV',
+								charset: 'UTF-8',
+								bom: true,
 								exportOptions: {
 									columns: ':visible'
 								}
